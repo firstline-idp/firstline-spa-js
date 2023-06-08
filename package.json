@@ -1,0 +1,60 @@
+{
+  "name": "@first-line/firstline-spa-js",
+  "version": "1.0.1",
+  "description": "Javascript Library for Frontend integrations of Firstline IDP",
+  "author": "Firstline",
+  "keywords": [
+    "Firstline",
+    "Javascript",
+    "IDP"
+  ],
+  "license": "MIT",
+  "main": "dist/firstline-spa-js.cjs.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/firstline-spa-js.esm.js",
+  "sideEffects": false,
+  "scripts": {
+    "build": "rollup -c --environment NODE_ENV:production",
+    "test": "jest --coverage"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "crypto-js": "^4.1.1"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^4.1.1",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-replace": "^5.0.1",
+    "@rollup/plugin-terser": "^0.1.0",
+    "rollup-plugin-esbuild": "^5.0.0",
+    "rollup-plugin-dts": "^5.1.1",
+    "@testing-library/jest-dom": "^5.16.5",
+    "rollup": "^3.7.0",
+    "rollup-plugin-analyzer": "^4.0.0",
+    "rollup-plugin-delete": "^2.0.0",
+    "rollup-plugin-dev": "^1.1.3",
+    "rollup-plugin-livereload": "^2.0.5",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-serve": "^2.0.2",
+    "rollup-plugin-typescript2": "^0.34.1",
+    "ts-jest": "^29.0.3",
+    "tslib": "^2.5.0",
+    "typescript": "^4.9.4"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx"
+    ],
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    }
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ]
+}

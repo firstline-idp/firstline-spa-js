@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "lib": ["es2017", "dom"],
+    "jsx": "react-jsx",
+
+    "rootDir": "./src",
+    "moduleResolution": "node",
+    "typeRoots": ["node_modules/@types"],
+    "declaration": true,
+    "incremental": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": true,
+
+    "outDir": "./dist",
+    "declarationDir": "./dist"
+  },
+  "include": ["src/**/*"]
+}
