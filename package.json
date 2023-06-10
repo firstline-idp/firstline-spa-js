@@ -9,6 +9,10 @@
     "IDP"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/firstline-idp/firstline-spa-js.git"
+  },
   "main": "dist/firstline-spa-js.cjs.js",
   "types": "dist/index.d.ts",
   "module": "dist/firstline-spa-js.esm.js",
