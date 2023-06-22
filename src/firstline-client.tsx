@@ -1,5 +1,7 @@
 import { generateChallenge, parseJwt, randomToken, stringQuery } from "./utils";
 
+export type action_hint = "login" | "signup";
+
 export interface FirstlineClientOptions {
   domain: string;
   audience: string;
@@ -18,6 +20,7 @@ export interface AuthorizeQueryParams {
   redirect_uri: string;
   state: string;
   code_challenge: string;
+  action_hint?: string;
 }
 
 export interface ExchangeCodeResponse {
@@ -35,7 +38,7 @@ export class FirstlineClient {
       : `https://${options.domain}`;
   }
 
-  public async loginRedirect() {
+  public async loginRedirect(action_hint: action_hint = "login") {
     const code_verifier = randomToken(43);
     const authorizeQueryParams: AuthorizeQueryParams = {
       grant_type: "authorization_code",
@@ -46,6 +49,7 @@ export class FirstlineClient {
       redirect_uri: this.options.redirect_uri,
       state: randomToken(64),
       code_challenge: await generateChallenge(code_verifier),
+      action_hint: action_hint,
     };
     const query = stringQuery(authorizeQueryParams);
 
@@ -149,12 +153,7 @@ export class FirstlineClient {
               .split("?")[0]
         );
         return tokenResponse;
-      } else console.error("states do not match");
-    } else if (
-      stateParam !== storedState ||
-      (!storedCodeVerifier && codeParam)
-    ) {
-      console.error("missing/mismatch state/code_verifier");
+      }
     }
     return null;
   }
@@ -185,7 +184,7 @@ export class FirstlineClient {
   }
 
   public getUser(tokens: ExchangeCodeResponse): any {
-    if (tokens && tokens.id_token) {
+    if (tokens?.id_token) {
       return parseJwt(tokens.id_token);
     }
     return null;
