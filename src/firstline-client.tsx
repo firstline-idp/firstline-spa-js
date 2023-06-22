@@ -20,13 +20,19 @@ export interface AuthorizeQueryParams {
   redirect_uri: string;
   state: string;
   code_challenge: string;
-  action_hint?: string;
+  action_hint?: action_hint;
 }
 
 export interface ExchangeCodeResponse {
   access_token: string;
   id_token: string;
   refresh_token: string;
+}
+
+export interface LoginRedirectOptions {
+  redirect_uri?: string;
+  state?: string;
+  action_hint?: action_hint;
 }
 
 export class FirstlineClient {
@@ -38,7 +44,7 @@ export class FirstlineClient {
       : `https://${options.domain}`;
   }
 
-  public async loginRedirect(action_hint: action_hint = "login") {
+  public async loginRedirect(options?: LoginRedirectOptions) {
     const code_verifier = randomToken(43);
     const authorizeQueryParams: AuthorizeQueryParams = {
       grant_type: "authorization_code",
@@ -46,10 +52,10 @@ export class FirstlineClient {
       response_mode: "query",
       audience: this.options.audience,
       client_id: this.options.client_id,
-      redirect_uri: this.options.redirect_uri,
-      state: randomToken(64),
+      redirect_uri: options?.redirect_uri ?? this.options.redirect_uri,
+      state: options?.state ?? randomToken(64),
       code_challenge: await generateChallenge(code_verifier),
-      action_hint: action_hint,
+      action_hint: options?.action_hint ?? "login",
     };
     const query = stringQuery(authorizeQueryParams);
 
